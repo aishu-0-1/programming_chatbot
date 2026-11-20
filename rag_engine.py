@@ -1,188 +1,384 @@
 
-import streamlit as st
-from rag_engine import ask_rag
+import os
+import re
 
-# ----------------------------------
-# PAGE SETTINGS
-# ----------------------------------
 
-st.set_page_config(
-    page_title="Programming AI Chatbot",
-    page_icon="🤖",
-    layout="wide"
-)
+# ==========================================
+# 1. LOAD KNOWLEDGE FILE
+# ==========================================
 
-# ----------------------------------
-# DESIGN / BACKGROUND
-# ----------------------------------
+def load_knowledge(language):
 
-st.markdown("""
-<style>
+    files = {
+        "C": "c.txt",
+        "Python": "python.txt",
+        "Java": "java.txt"
+    }
 
-.stApp {
-    background: linear-gradient(
-        135deg,
-        #ead5ff,
-        #d6e9ff,
-        #d5ffe6
-    );
+    filename = files.get(language)
+
+    if filename is None:
+        return None
+
+    folder = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(folder, filename)
+
+    if not os.path.exists(filepath):
+        return None
+
+    with open(filepath, "r", encoding="utf-8") as file:
+        return file.read()
+
+
+# ==========================================
+# 2. DIVIDE KNOWLEDGE INTO TOPICS
+# ==========================================
+
+def get_sections(knowledge):
+
+    sections = re.split(
+        r"(?m)(?=^\d+\.\s)",
+        knowledge
+    )
+
+    result = []
+
+    for section in sections:
+
+        section = section.strip()
+
+        if section and re.match(r"^\d+\.\s", section):
+            result.append(section)
+
+    return result
+
+
+# ==========================================
+# 3. DETAILED FUNCTION EXPLANATIONS
+# ==========================================
+
+def explain_functions(language):
+
+    explanations = {
+
+        "C": """
+## FUNCTIONS IN C
+
+A function is a block of code that performs a specific task.
+It helps divide a program into smaller reusable parts.
+
+### Types of functions
+1. Library functions
+2. User-defined functions
+
+### Syntax
+
+return_type function_name(parameters)
+{
+    statements;
+    return value;
 }
 
-[data-testid="stSidebar"] {
-    background-color: #f1e5ff;
+### Example
+
+#include <stdio.h>
+
+int add(int a, int b)
+{
+    return a + b;
 }
 
-.block-container {
-    max-width: 1000px;
-    margin: auto;
-    padding-top: 2rem;
+int main()
+{
+    int result = add(10, 20);
+    printf("Sum = %d", result);
+    return 0;
 }
 
-h1 {
-    text-align: center;
-    color: #7626a8;
+### Output
+Sum = 30
+
+### Explanation
+- int: return type
+- add: function name
+- a and b: parameters
+- return a + b: returns the sum
+- add(10, 20): function call
+
+### Advantages
+- Code reusability
+- Easy debugging
+- Reduces repetition
+- Improves readability
+""",
+
+        "Python": """
+## FUNCTIONS IN PYTHON
+
+A function is a reusable block of code that performs a specific task.
+Functions are created using the def keyword.
+
+### Syntax
+
+def function_name(parameters):
+    statements
+    return value
+
+### Example
+
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+print("Sum =", result)
+
+### Output
+Sum = 30
+
+### Explanation
+- def: defines a function
+- add: function name
+- a and b: parameters
+- return: returns the result
+- add(10, 20): function call
+
+### Types of functions
+1. Built-in functions
+2. User-defined functions
+3. Lambda functions
+4. Recursive functions
+
+### Advantages
+- Reusable code
+- Easy maintenance
+- Less repetition
+- Improved readability
+""",
+
+        "Java": """
+## METHODS IN JAVA
+
+A method is a block of code inside a class that performs a specific task.
+Methods help organize and reuse code.
+
+### Syntax
+
+returnType methodName(parameters)
+{
+    statements;
+    return value;
 }
 
-.stButton > button {
-    border-radius: 12px;
-    background-color: white;
-    color: #7626a8;
-    border: 1px solid #c9a7f5;
+### Example
+
+class Main {
+
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        int result = add(10, 20);
+        System.out.println("Sum = " + result);
+    }
 }
 
-.stButton > button:hover {
-    background-color: #ead5ff;
-    border: 1px solid #7626a8;
-}
+### Output
+Sum = 30
 
-</style>
-""", unsafe_allow_html=True)
+### Explanation
+- static: method can be called without creating an object in this example
+- int: return type
+- add: method name
+- a and b: parameters
+- return: returns the result
+- main(): starting point of Java program
 
+### Types of methods
+1. Predefined methods
+2. User-defined methods
+3. Static methods
+4. Instance methods
 
-# ----------------------------------
-# SIDEBAR
-# ----------------------------------
+### Advantages
+- Code reusability
+- Easy maintenance
+- Reduces repeated code
+- Better program organization
+"""
+    }
 
-st.sidebar.title("🤖 Programming AI")
-st.sidebar.caption("Your Personal Coding Assistant")
-
-
-# ----------------------------------
-# PIPELINE
-# ----------------------------------
-
-with st.sidebar.expander("🔄 Pipeline"):
-
-    st.markdown("""
-    ### About the Project
-
-    Programming AI Chatbot helps students
-    learn C, Java and Python programming.
-
-    ### How it works
-
-    1. Select a programming language.
-    2. Enter your question.
-    3. Search the knowledge files.
-    4. Retrieve the relevant topic.
-    5. Display the answer.
-
-    ### Knowledge Files
-
-    - c.txt
-    - java.txt
-    - python.txt
-
-    ### Technologies
-
-    - Python
-    - Streamlit
-    - Retrieval System
-    - GitHub
-    """)
+    return explanations.get(language)
 
 
-# ----------------------------------
-# INFO
-# ----------------------------------
+# ==========================================
+# 4. EXTRACT KEYWORDS
+# ==========================================
 
-with st.sidebar.expander("ℹ️ Info"):
+def get_keywords(question):
 
-    st.markdown("""
-    ### Programming AI Chatbot
+    question = question.lower()
 
-    A programming learning chatbot
-    supporting three languages.
+    aliases = {
+        "loop": ["loops", "iteration", "iterative"],
+        "function": ["functions", "method", "methods"],
+        "array": ["arrays"],
+        "variable": ["variables"],
+        "string": ["strings"],
+        "class": ["classes"],
+        "object": ["objects"],
+        "inheritance": ["inherited"],
+        "condition": ["conditions", "conditional"],
+        "pointer": ["pointers"],
+        "operator": ["operators"],
+        "exception": ["exceptions"],
+        "file": ["files"],
+        "datatype": ["data type", "data types"],
+        "dictionary": ["dictionaries"],
+        "list": ["lists"],
+        "tuple": ["tuples"],
+        "set": ["sets"],
+        "constructor": ["constructors"],
+        "recursion": ["recursive"],
+        "polymorphism": [],
+        "encapsulation": [],
+        "abstraction": []
+    }
 
-    ### Team Members
+    for main_word, related_words in aliases.items():
 
-    - Jyothi
-    - Aishwarya
-    - Chaithra B H
-    - Madava
+        for word in related_words:
+            question = question.replace(word, main_word)
 
-    ### Languages
+    stop_words = {
+        "what", "is", "are", "was", "were",
+        "the", "a", "an", "in", "of", "to",
+        "how", "explain", "tell", "me", "about",
+        "with", "for", "and", "please", "give",
+        "write", "show", "describe", "can", "you",
+        "program", "programming", "language",
+        "detail", "details", "detailed", "example", "examples"
+    }
 
-    - C
-    - Python
-    - Java
+    words = re.findall(r"[a-zA-Z]+", question)
 
-    ### Project
+    keywords = [
+        word for word in words
+        if word not in stop_words and len(word) > 1
+    ]
 
-    Programming Language Learning Assistant
-    """)
-
-
-# ----------------------------------
-# MAIN CHATBOT
-# ----------------------------------
-
-st.title("🌈 Programming AI Chatbot")
-
-st.markdown(
-    "<h3 style='text-align:center;'>💻 Your Personal Coding Assistant</h3>",
-    unsafe_allow_html=True
-)
-
-st.markdown("---")
-
-
-# ----------------------------------
-# LANGUAGE SELECTION
-# ----------------------------------
-
-language = st.selectbox(
-    "📚 Choose Programming Language",
-    ["C", "Python", "Java"]
-)
-
-
-# ----------------------------------
-# QUESTION INPUT
-# ----------------------------------
-
-question = st.text_input(
-    "💬 Ask your question",
-    placeholder="Explain loops, functions, variables..."
-)
+    return keywords
 
 
-# ----------------------------------
-# ASK CHATBOT
-# ----------------------------------
+# ==========================================
+# 5. FIND THE BEST MATCHING TOPIC
+# ==========================================
 
-if st.button("✨ Ask Chatbot", use_container_width=True):
+def find_best_section(question, sections):
 
-    if question.strip():
+    keywords = get_keywords(question)
 
-        with st.spinner("🤖 Searching programming knowledge..."):
+    best_section = None
+    best_score = 0
 
-            answer = ask_rag(question, language)
+    for section in sections:
 
-        st.markdown("### 🤖 Answer")
+        lines = section.splitlines()
 
-        st.markdown(answer)
+        heading = lines[0].lower() if lines else ""
+        content = section.lower()
 
-    else:
+        score = 0
 
-        st.warning("Please enter your question.")
+        for word in keywords:
+
+            # Heading match
+            if word in heading:
+                score += 5
+
+            # Content match
+            if word in content:
+                score += 1
+
+        if score > best_score:
+
+            best_score = score
+            best_section = section
+
+    if best_score > 0:
+        return best_section
+
+    return None
+
+
+# ==========================================
+# 6. MAIN CHATBOT FUNCTION
+# ==========================================
+
+def ask_rag(question, language):
+
+    question = question.strip()
+
+    if not question:
+        return "Please enter a question."
+
+    knowledge = load_knowledge(language)
+
+    if knowledge is None:
+        return (
+            "Knowledge file not found. "
+            "Please check c.txt, python.txt and java.txt."
+        )
+
+    sections = get_sections(knowledge)
+
+    if not sections:
+        return "No topics found in the knowledge file."
+
+    question_lower = question.lower()
+
+    # Introduction questions
+    intro_patterns = [
+        "what is c",
+        "what is java",
+        "what is python",
+        "define c",
+        "define java",
+        "define python",
+        "introduction to c",
+        "introduction to java",
+        "introduction to python"
+    ]
+
+    if any(pattern in question_lower for pattern in intro_patterns):
+
+        for section in sections:
+
+            if "introduction" in section.lower():
+                return section
+
+    # Detailed function explanations
+    function_words = [
+        "function", "functions",
+        "method", "methods"
+    ]
+
+    if any(word in question_lower for word in function_words):
+
+        answer = explain_functions(language)
+
+        if answer:
+            return answer
+
+    # Retrieve matching knowledge topic
+    answer = find_best_section(question, sections)
+
+    if answer:
+        return answer
+
+    return (
+        "Sorry, I couldn't find this topic in the "
+        + language
+        + " knowledge file. Try asking about variables, "
+        "loops, functions, arrays, classes or operators."
+    )
