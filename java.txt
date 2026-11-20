@@ -1,0 +1,281 @@
+
+JAVA PROGRAMMING LANGUAGE
+
+1. INTRODUCTION TO JAVA
+
+Java is a high-level, general-purpose, object-oriented programming language developed by James Gosling at Sun Microsystems. Java was released in 1995. It is widely used to develop web applications, desktop software, enterprise applications and Android applications. Java is popular because it is portable, secure, reliable and supports object-oriented programming.
+
+
+2. FEATURES OF JAVA
+
+Java is platform independent, object-oriented, secure, robust and portable. It supports multithreading, automatic memory management and exception handling. Java programs can run on different operating systems using the Java Virtual Machine (JVM).
+
+
+3. VARIABLES
+
+A variable is a named memory location used to store data. Variables are used to store information that can be accessed and modified during program execution.
+
+Example:
+int age = 20;
+String name = "akshatha";
+
+Here, age stores an integer and name stores text.
+
+
+4. DATA TYPES
+
+Java data types are divided into primitive and non-primitive types.
+
+Primitive data types:
+byte - stores small integer values.
+short - stores short integer values.
+int - stores integer values.
+long - stores large integer values.
+float - stores decimal values.
+double - stores high-precision decimal values.
+char - stores a single character.
+boolean - stores true or false.
+
+Non-primitive data types include strings, arrays, classes and interfaces.
+
+
+5. OPERATORS
+
+Operators perform operations on variables and values.
+
+Arithmetic operators: +, -, *, /, %
+Relational operators: ==, !=, >, <, >=, <=
+Logical operators: &&, ||, !
+Assignment operators: =, +=, -=
+Increment operator: ++
+Decrement operator: --
+
+Example:
+int a = 10;
+int b = 5;
+int sum = a + b;
+
+
+6. CONDITIONAL STATEMENTS
+
+Conditional statements allow a program to make decisions.
+
+if - executes code when a condition is true.
+if-else - selects between two blocks.
+else-if - checks multiple conditions.
+switch - selects a matching case.
+
+Example:
+if (age >= 18) {
+    System.out.println("Adult");
+} else {
+    System.out.println("Minor");
+}
+
+
+7. LOOPS
+
+Loops repeat a block of code.
+
+for loop - repeats code for a specified number of iterations.
+while loop - repeats while a condition is true.
+do-while loop - executes at least once.
+enhanced for loop - iterates through arrays and collections.
+
+Example:
+for (int i = 1; i <= 5; i++) {
+    System.out.println(i);
+}
+
+
+8. ARRAYS
+
+An array stores multiple values of the same data type in a fixed-size collection. Array indexes start from zero.
+
+Example:
+int[] numbers = {10, 20, 30, 40, 50};
+
+Arrays are used to store and process multiple values efficiently.
+
+
+9. STRINGS
+
+String is a class used to store text. Strings contain sequences of characters.
+
+Example:
+String name = "Aishu";
+
+Common string methods:
+length() returns the number of characters.
+toUpperCase() converts text to uppercase.
+toLowerCase() converts text to lowercase.
+charAt() returns a character at a specified position.
+equals() compares string values.
+
+
+10. CLASSES AND OBJECTS
+
+A class is a blueprint that defines the properties and behaviours of objects.
+
+An object is an instance of a class. Objects contain data and can perform actions through methods.
+
+Example:
+class Student {
+    String name;
+    int age;
+}
+
+A Student object can represent an individual student's information.
+
+
+11. INHERITANCE
+
+Inheritance allows one class to acquire properties and methods from another class. It supports code reuse and helps create relationships between classes.
+
+The extends keyword is used for class inheritance.
+
+Example:
+class Animal {
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking");
+    }
+}
+
+
+12. POLYMORPHISM
+
+Polymorphism means one name or interface can represent different behaviours.
+
+Method overloading allows methods to have the same name with different parameters.
+
+Method overriding allows a subclass to provide its own implementation of a parent class method.
+
+Polymorphism improves flexibility and code reusability.
+
+
+13. ENCAPSULATION
+
+Encapsulation combines data and methods inside a class and restricts direct access to internal data.
+
+Private variables and public getter and setter methods are commonly used to control access.
+
+Encapsulation improves security, data protection and maintainability.
+
+
+14. ABSTRACTION
+
+Abstraction hides implementation details and shows only essential features to the user.
+
+Abstract classes and interfaces are used to achieve abstraction in Java.
+
+Abstraction makes programs easier to understand and manage.
+
+
+15. CONSTRUCTORS
+
+A constructor is a special method that is called when an object is created. It initializes an object.
+
+A constructor has the same name as its class and does not have a return type.
+
+Types:
+Default constructor.
+Parameterized constructor.
+
+Example:
+class Student {
+    Student() {
+        System.out.println("Object created");
+    }
+}
+
+
+16. INTERFACES
+
+An interface defines a contract that implementing classes must follow. Interfaces help achieve abstraction and support multiple inheritance of type.
+
+The implements keyword is used to implement an interface.
+
+
+17. EXCEPTION HANDLING
+
+Exception handling manages runtime errors and prevents abnormal program termination.
+
+Keywords:
+try - contains code that may cause an exception.
+catch - handles an exception.
+finally - executes cleanup code.
+throw - explicitly throws an exception.
+throws - declares possible exceptions.
+
+Exception handling makes applications more reliable.
+
+
+18. MULTITHREADING
+
+Multithreading allows multiple threads to execute within a program. Threads can perform different tasks concurrently.
+
+It helps improve responsiveness and efficient resource utilization.
+
+Threads can be created using the Thread class or Runnable interface.
+
+
+19. JVM, JRE AND JDK
+
+JVM (Java Virtual Machine) executes Java bytecode.
+
+JRE (Java Runtime Environment) provides the environment required to run Java applications.
+
+JDK (Java Development Kit) contains development tools including the compiler and runtime components needed to develop Java applications.
+
+
+20. FILE HANDLING
+
+Java provides file handling features to create, read, write and manage files.
+
+Classes such as File, FileReader, FileWriter, BufferedReader and Scanner can be used for file operations.
+
+
+21. APPLICATIONS OF JAVA
+
+Java is used in Android applications, enterprise software, banking systems, web applications, desktop applications, server-side development and cloud software.
+
+
+22. ADVANTAGES OF JAVA
+
+Java is platform independent.
+Java supports object-oriented programming.
+Java provides automatic memory management.
+Java supports multithreading.
+Java has strong security features.
+Java has a large collection of libraries.
+
+
+23. DISADVANTAGES OF JAVA
+
+Java may use more memory than some lower-level languages.
+It can be slower than native compiled languages in some situations.
+Its syntax can be lengthy for simple programs.
+It requires a Java runtime environment to execute Java applications.
+
+
+24. HELLO WORLD PROGRAM
+
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+
+EXPLANATION:
+
+class Main defines a class named Main.
+main() is the entry point of the Java program.
+String[] args stores command-line arguments.
+System.out.println() displays text on the screen.
+The JVM executes the compiled Java program.
