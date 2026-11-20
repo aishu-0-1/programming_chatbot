@@ -8,16 +8,20 @@ st.set_page_config(
     layout="wide"
 )
 
-st.markdown("""
-<style>
-.stApp {
-    background: linear-gradient(135deg, #ead5ff, #d6e9ff, #d5ffe6);
-}
-[data-testid="stSidebar"] {
-    background-color: #f1e5ff;
-}
-</style>
-""", unsafe_allow_html=True
+# Background design
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #ead5ff, #d6e9ff, #d5ffe6);
+    }
+    [data-testid="stSidebar"] {
+        background-color: #f1e5ff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # SIDEBAR
 st.sidebar.title("🤖 Programming AI")
@@ -48,11 +52,13 @@ if page == "💬 Chatbot":
     if st.button("✨ Ask Chatbot"):
 
         if question.strip():
+
             with st.spinner("Searching programming knowledge..."):
                 answer = ask_rag(question, language)
 
             st.markdown("### 🤖 Answer")
             st.markdown(answer)
+
         else:
             st.warning("Please enter your question.")
 
@@ -60,7 +66,6 @@ if page == "💬 Chatbot":
 elif page == "🔄 Pipeline":
 
     st.title("🔄 Project Pipeline")
-
     st.header("About the Project")
 
     st.write("""
@@ -76,20 +81,25 @@ elif page == "🔄 Pipeline":
     st.header("⚙️ How It Works")
 
     st.markdown("""
-    **Step 1 — Language Selection**  
+    **Step 1 — Language Selection**
+
     The user selects C, Java or Python.
 
-    **Step 2 — Question Input**  
+    **Step 2 — Question Input**
+
     The user enters a programming question.
 
-    **Step 3 — Knowledge Retrieval**  
+    **Step 3 — Knowledge Retrieval**
+
     The chatbot searches the selected language's knowledge file.
 
-    **Step 4 — Answer Generation**  
+    **Step 4 — Answer Retrieval**
+
     Relevant information is retrieved from the knowledge.
 
-    **Step 5 — Display Answer**  
-    The answer is shown to the user on the chatbot page.
+    **Step 5 — Display Answer**
+
+    The answer is displayed on the chatbot page.
     """)
 
     st.header("📚 Knowledge Files")
@@ -105,7 +115,7 @@ elif page == "🔄 Pipeline":
     st.markdown("""
     - Python
     - Streamlit
-    - Text-based knowledge retrieval
+    - Knowledge retrieval
     - GitHub
     """)
 
@@ -113,7 +123,6 @@ elif page == "🔄 Pipeline":
 elif page == "ℹ️ Info":
 
     st.title("ℹ️ Project Information")
-
     st.header("Programming AI Chatbot")
 
     st.write("""
