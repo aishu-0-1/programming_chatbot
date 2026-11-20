@@ -1,31 +1,46 @@
 
-def load_data():
-    with open("data.txt", "r", encoding="utf-8") as file:
+import os
+
+def load_knowledge(language):
+    files = {
+        "C": "c.txt",
+        "Java": "java.txt",
+        "Python": "python.txt"
+    }
+
+    filename = files.get(language)
+
+    if not filename or not os.path.exists(filename):
+        return "Knowledge file not found."
+
+    with open(filename, "r", encoding="utf-8") as file:
         return file.read()
 
 
-def retrieve(question, background):
-    question = question.lower()
+def ask_rag(question, language):
+    knowledge = load_knowledge(language)
 
-    if "c" in question or "pointer" in question:
-        return background[:500]
+    if knowledge == "Knowledge file not found.":
+        return knowledge
 
-    if "java" in question:
-        start = background.find("JAVA PROGRAMMING")
-        end = background.find("PYTHON PROGRAMMING")
-        return background[start:end]
+    question_words = question.lower().split()
 
-    if "python" in question:
-        start = background.find("PYTHON PROGRAMMING")
-        return background[start:]
+    sections = knowledge.split("\n\n")
 
-    if "compare" in question:
-        return background
+    best_section = ""
+    best_score = 0
 
-    return background
+    for section in sections:
+        score = sum(
+            1 for word in question_words
+            if len(word) > 2 and word in section.lower()
+        )
 
+        if score > best_score:
+            best_score = score
+            best_section = section
 
-def ask_rag(question):
-    background = load_data()
-    answer = retrieve(question, background)
-    return answer
+    if best_score == 0:
+        return knowledge
+
+    return best_section
