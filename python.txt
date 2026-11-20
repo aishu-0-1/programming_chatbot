@@ -1,0 +1,294 @@
+
+PYTHON PROGRAMMING LANGUAGE
+
+1. INTRODUCTION TO PYTHON
+
+Python is a high-level, interpreted, general-purpose programming language created by Guido van Rossum. Python was first released in 1991. It is popular because of its simple syntax, readability and ease of learning. Python is used in web development, artificial intelligence, machine learning, automation, data science and software development.
+
+2. FEATURES OF PYTHON
+
+Python is easy to learn and understand.
+Python uses simple and readable syntax.
+Python is an interpreted language.
+Python supports object-oriented programming.
+Python is dynamically typed.
+Python provides a large collection of libraries.
+Python supports cross-platform development.
+Python allows rapid application development.
+
+3. VARIABLES
+
+A variable is a name used to store a value in memory. Variables can store numbers, text and other data.
+
+Example:
+name = "Aishu"
+age = 20
+marks = 85.5
+
+Python does not require the programmer to declare the variable type explicitly.
+
+4. DATA TYPES
+
+Data types identify the kind of value stored in a variable.
+
+int - stores integer values.
+float - stores decimal values.
+str - stores text.
+bool - stores True or False.
+list - stores multiple items in an ordered collection.
+tuple - stores ordered and immutable items.
+set - stores unique items.
+dict - stores key-value pairs.
+
+Example:
+number = 10
+price = 25.5
+name = "Python"
+is_valid = True
+
+5. OPERATORS
+
+Operators are symbols used to perform operations on data.
+
+Arithmetic operators: +, -, *, /, %, //, **
+Comparison operators: ==, !=, >, <, >=, <=
+Logical operators: and, or, not
+Assignment operators: =, +=, -=, *=
+Membership operators: in, not in
+Identity operators: is, is not
+
+Example:
+a = 10
+b = 5
+print(a + b)
+
+6. CONDITIONAL STATEMENTS
+
+Conditional statements help a program make decisions.
+
+if executes code when a condition is true.
+elif checks another condition.
+else executes when the earlier conditions are false.
+
+Example:
+age = 18
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+7. LOOPS
+
+Loops repeat statements multiple times.
+
+for loop iterates over a sequence or iterable.
+while loop repeats while its condition is true.
+break terminates a loop.
+continue skips the current iteration.
+pass is a placeholder statement.
+
+Example:
+for i in range(1, 6):
+    print(i)
+
+8. LISTS
+
+A list stores multiple values in a single variable. Lists are ordered, mutable and allow duplicate values.
+
+Example:
+fruits = ["apple", "banana", "mango"]
+
+append() adds an item.
+remove() removes an item.
+sort() sorts items.
+len() returns the number of items.
+
+9. TUPLES
+
+A tuple stores multiple values in an ordered collection. Tuples are immutable, meaning their items cannot be changed after creation.
+
+Example:
+numbers = (10, 20, 30)
+
+Tuples are useful when data should remain unchanged.
+
+10. DICTIONARIES
+
+A dictionary stores data in key-value pairs. Dictionaries are useful for representing structured information.
+
+Example:
+student = {
+    "name": "Aishu",
+    "age": 20,
+    "marks": 85
+}
+
+Keys are used to access their corresponding values.
+
+11. SETS
+
+A set is a collection of unique elements. Sets do not store duplicate values and are useful for removing duplicates and performing mathematical set operations.
+
+Example:
+numbers = {10, 20, 30, 20}
+
+The repeated value 20 is stored only once.
+
+12. FUNCTIONS
+
+A function is a reusable block of code that performs a particular task. Functions reduce repetition and make programs organized.
+
+Functions are defined using the def keyword.
+
+Example:
+def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)
+
+13. STRINGS
+
+A string is a sequence of characters enclosed in quotes.
+
+Example:
+message = "Hello Python"
+
+String operations include concatenation, slicing, indexing and formatting.
+
+Common methods:
+upper() converts to uppercase.
+lower() converts to lowercase.
+strip() removes surrounding whitespace.
+replace() replaces text.
+split() divides a string into parts.
+
+14. OBJECT-ORIENTED PROGRAMMING
+
+Python supports object-oriented programming.
+
+A class is a blueprint for creating objects.
+An object is an instance of a class.
+Inheritance allows a class to reuse another class's features.
+Polymorphism allows the same interface to behave differently.
+Encapsulation combines data and methods.
+Abstraction hides unnecessary implementation details.
+
+15. CLASSES AND OBJECTS
+
+A class defines attributes and methods. Objects are created from a class and represent individual instances.
+
+Example:
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def display(self):
+        print(self.name)
+
+student = Student("Aishu")
+student.display()
+
+16. INHERITANCE
+
+Inheritance allows a child class to reuse properties and methods from a parent class. It supports code reuse and organization.
+
+Example:
+class Animal:
+    def eat(self):
+        print("Eating")
+
+class Dog(Animal):
+    def bark(self):
+        print("Barking")
+
+17. EXCEPTION HANDLING
+
+Exception handling manages errors that occur while a program is running.
+
+try contains code that may cause an error.
+except handles the error.
+else executes if no exception occurs.
+finally executes whether an exception occurs or not.
+
+Example:
+try:
+    number = int(input("Enter a number: "))
+except ValueError:
+    print("Invalid input")
+
+18. FILE HANDLING
+
+File handling allows programs to create, read, write and modify files.
+
+open() opens a file.
+read() reads file contents.
+write() writes data.
+close() closes a file.
+with automatically manages the file context.
+
+Example:
+with open("data.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+19. MODULES AND LIBRARIES
+
+A module is a Python file containing reusable code. Libraries provide collections of modules and tools for different tasks.
+
+import is used to include modules.
+
+Examples:
+math - mathematical functions.
+random - random number generation.
+datetime - date and time operations.
+os - operating system operations.
+
+20. LAMBDA FUNCTIONS
+
+A lambda function is a small anonymous function defined using the lambda keyword. It is commonly used for short operations.
+
+Example:
+square = lambda x: x * x
+print(square(5))
+
+21. LIST COMPREHENSION
+
+List comprehension provides a concise way to create lists using expressions and loops.
+
+Example:
+squares = [x * x for x in range(1, 6)]
+
+It creates a list of squares from 1 to 5.
+
+22. APPLICATIONS OF PYTHON
+
+Python is used in artificial intelligence, machine learning, data science, web development, automation, scientific computing, game development and scripting.
+
+23. ADVANTAGES OF PYTHON
+
+Python is easy to learn.
+Python has readable syntax.
+Python has many libraries.
+Python supports rapid development.
+Python is suitable for beginners.
+Python works across many operating systems.
+
+24. DISADVANTAGES OF PYTHON
+
+Python can be slower than compiled languages for some tasks.
+Python may consume more memory.
+Dynamic typing can lead to runtime errors.
+It is not always the best choice for low-level system programming.
+
+25. HELLO WORLD PROGRAM
+
+print("Hello World")
+
+EXPLANATION:
+
+print() is a built-in function.
+It displays text or values on the screen.
+"Hello World" is the text being displayed.
+Python does not require semicolons for this statement.
