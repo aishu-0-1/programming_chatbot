@@ -71,10 +71,10 @@ with st.sidebar.expander("ℹ️ Info"):
     Educational programming assistant.
 
     **Team Members**
-    - Jyothi
-    - Aishwarya
-    - Chaithra B H
-    - Madava
+    - Akshata EM
+    - Kavyashree
+    - Lavnaya
+    - Harshita v
 
     **Languages**
     - C
