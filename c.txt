@@ -1,0 +1,228 @@
+
+C PROGRAMMING LANGUAGE
+
+1. INTRODUCTION TO C
+
+C is a general-purpose, procedural programming language developed by Dennis Ritchie at Bell Laboratories. It was created in the early 1970s. C is widely used because it is fast, efficient, portable and provides direct access to memory. It is used in operating systems, embedded systems, compilers and many software applications.
+
+
+2. FEATURES OF C
+
+C is a structured programming language that allows programs to be divided into functions. It supports variables, data types, operators, loops, arrays, pointers and structures. C provides efficient execution, memory control, portability and a rich collection of standard library functions.
+
+
+3. VARIABLES
+
+A variable is a named memory location used to store data. The value of a variable can change during program execution.
+
+Example:
+int age = 20;
+
+Here, age is the variable name and 20 is its value.
+
+
+4. DATA TYPES
+
+Data types specify the kind of data a variable can store.
+
+int - stores integer values.
+float - stores decimal values.
+char - stores a single character.
+double - stores decimal values with greater precision.
+
+Example:
+int number = 10;
+float price = 25.5;
+char grade = 'A';
+double salary = 25000.75;
+
+
+5. OPERATORS
+
+Operators are symbols used to perform operations on variables and values.
+
+Arithmetic operators: +, -, *, /, %
+Relational operators: ==, !=, >, <, >=, <=
+Logical operators: &&, ||, !
+Assignment operator: =
+Increment operator: ++
+Decrement operator: --
+
+Example:
+int a = 10, b = 5;
+int sum = a + b;
+
+
+6. CONDITIONAL STATEMENTS
+
+Conditional statements allow a program to make decisions based on conditions.
+
+if: Executes a block when a condition is true.
+if-else: Selects between two blocks.
+else-if: Checks multiple conditions.
+switch: Selects a block based on a matching case.
+
+Example:
+if (age >= 18) {
+    printf("Eligible");
+} else {
+    printf("Not eligible");
+}
+
+
+7. LOOPS
+
+Loops execute statements repeatedly.
+
+for loop: Used when the number of repetitions is known.
+while loop: Repeats while the condition remains true.
+do-while loop: Executes at least once before checking the condition.
+
+Example:
+for (int i = 1; i <= 5; i++) {
+    printf("%d", i);
+}
+
+
+8. ARRAYS
+
+An array stores multiple values of the same data type in contiguous memory locations. Array elements are accessed using indexes starting from zero.
+
+Example:
+int numbers[5] = {10, 20, 30, 40, 50};
+
+numbers[0] stores 10.
+numbers[1] stores 20.
+
+
+9. STRINGS
+
+A string is a sequence of characters stored in a character array and terminated by the null character '\0'.
+
+Example:
+char name[] = "Aishu";
+
+Strings are used to store names, messages and other text.
+
+
+10. FUNCTIONS
+
+A function is a reusable block of code designed to perform a specific task. Functions make programs easier to understand, organize, test and maintain.
+
+Types:
+Library functions are predefined functions.
+User-defined functions are created by programmers.
+
+Example:
+int add(int a, int b) {
+    return a + b;
+}
+
+
+11. POINTERS
+
+A pointer is a variable that stores the memory address of another variable. Pointers allow indirect access to data and are useful for memory management, arrays and functions.
+
+Example:
+int a = 10;
+int *ptr = &a;
+
+Here, ptr stores the address of variable a.
+The * symbol is used to declare a pointer.
+The & symbol obtains the address of a variable.
+
+
+12. STRUCTURES
+
+A structure is a user-defined data type that groups different types of variables under one name. Structures are useful for storing related information such as student details.
+
+Example:
+struct Student {
+    int id;
+    char name[50];
+    float marks;
+};
+
+
+13. INPUT AND OUTPUT
+
+C uses standard input and output functions.
+
+printf() displays output.
+scanf() accepts input.
+getchar() reads a character.
+putchar() displays a character.
+
+Example:
+int age;
+scanf("%d", &age);
+printf("%d", age);
+
+
+14. STORAGE AND MEMORY
+
+C provides control over memory through pointers and memory-related functions. Dynamic memory allocation allows memory to be allocated during program execution.
+
+malloc() allocates memory.
+calloc() allocates and initializes memory to zero.
+realloc() changes allocated memory size.
+free() releases allocated memory.
+
+
+15. FILE HANDLING
+
+File handling allows programs to create, read, write and modify files. It helps store information permanently.
+
+Common functions:
+fopen() opens a file.
+fclose() closes a file.
+fprintf() writes formatted data.
+fscanf() reads formatted data.
+fread() reads binary data.
+fwrite() writes binary data.
+
+
+16. COMPILATION
+
+A compiler converts C source code into executable machine code. The program is written in a source file, compiled, and then executed.
+
+Compilation helps identify syntax errors before the program runs.
+
+
+17. APPLICATIONS OF C
+
+C is used in operating systems, device drivers, embedded systems, compilers, networking software, databases and performance-critical applications.
+
+
+18. ADVANTAGES OF C
+
+C is fast and efficient.
+C supports structured programming.
+C provides powerful pointer operations.
+C allows low-level memory access.
+C is portable across many platforms.
+C has a large collection of libraries.
+
+
+19. DISADVANTAGES OF C
+
+C does not provide automatic memory management.
+C does not have built-in object-oriented features.
+Pointers can cause memory errors.
+Programmers must carefully manage memory and data.
+
+
+20. HELLO WORLD PROGRAM
+
+#include <stdio.h>
+
+int main() {
+    printf("Hello World");
+    return 0;
+}
+
+Explanation:
+#include <stdio.h> includes standard input and output functions.
+main() is the starting point of the program.
+printf() displays Hello World.
+return 0 indicates successful execution.
