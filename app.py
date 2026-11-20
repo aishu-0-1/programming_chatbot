@@ -1,5 +1,6 @@
 
 import streamlit as st
+from rag_engine import ask_rag
 
 st.set_page_config(
     page_title="Programming AI Chatbot",
@@ -12,155 +13,141 @@ st.markdown("""
 .stApp {
     background: linear-gradient(135deg, #ead5ff, #d6e9ff, #d5ffe6);
 }
-h1 {
-    color: #7626a8;
-    text-align: center;
+[data-testid="stSidebar"] {
+    background-color: #f1e5ff;
 }
 </style>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True
 
-st.title("🌈 Programming AI Chatbot")
-st.subheader("💻 Your Personal Coding Assistant")
-st.write("Ask questions and learn programming step by step.")
+# SIDEBAR
+st.sidebar.title("🤖 Programming AI")
+st.sidebar.caption("Your Coding Assistant")
 
-language = st.selectbox(
-    "Choose a Programming Language",
-    ["C", "Java", "Python"]
+page = st.sidebar.radio(
+    "Navigation",
+    ["💬 Chatbot", "🔄 Pipeline", "ℹ️ Info"]
 )
 
-question = st.text_input(
-    "Ask your question",
-    placeholder="Explain C programming in detail..."
-)
+# CHATBOT PAGE
+if page == "💬 Chatbot":
 
-if st.button("✨ Ask Chatbot"):
+    st.title("🌈 Programming AI Chatbot")
+    st.subheader("💻 Your Personal Coding Assistant")
+    st.write("Learn C, Java and Python step by step.")
 
-    if not question:
-        st.warning("Please enter your question.")
+    language = st.selectbox(
+        "Choose Programming Language",
+        ["C", "Java", "Python"]
+    )
 
-    elif language == "C":
+    question = st.text_input(
+        "Ask your programming question",
+        placeholder="Explain loops in detail..."
+    )
 
-        st.markdown("## 🤖 C Programming")
+    if st.button("✨ Ask Chatbot"):
 
-        st.write("""
-        C is a general-purpose procedural programming language
-        developed by Dennis Ritchie in the early 1970s.
-        It is widely used for system programming and application development.
+        if question.strip():
+            with st.spinner("Searching programming knowledge..."):
+                answer = ask_rag(question, language)
 
-        ### Features of C
-        - Simple and efficient programming language.
-        - Supports pointers and memory management.
-        - Provides functions for code reuse.
-        - Supports arrays, structures and loops.
-        - Fast execution.
+            st.markdown("### 🤖 Answer")
+            st.markdown(answer)
+        else:
+            st.warning("Please enter your question.")
 
-        ### Applications
-        - Operating systems.
-        - Embedded systems.
-        - Device drivers.
-        - Compilers.
-        - Database systems.
+# PIPELINE PAGE
+elif page == "🔄 Pipeline":
 
-        ### Example Program
-        """)
+    st.title("🔄 Project Pipeline")
 
-        st.code("""
-#include <stdio.h>
+    st.header("About the Project")
 
-int main() {
-    printf("Hello World");
-    return 0;
-}
-        """, language="c")
+    st.write("""
+    Programming AI Chatbot is an educational assistant designed
+    to help students learn three programming languages:
+    C, Java and Python.
 
-        st.write("""
-        ### Explanation
-        1. #include <stdio.h> includes the standard input/output library.
-        2. main() is the starting point of the program.
-        3. printf() displays text on the screen.
-        4. return 0 indicates successful program execution.
-        """)
+    Users can select a programming language and ask questions.
+    The chatbot searches its programming knowledge files
+    and displays relevant information.
+    """)
 
-    elif language == "Java":
+    st.header("⚙️ How It Works")
 
-        st.markdown("## 🤖 Java Programming")
+    st.markdown("""
+    **Step 1 — Language Selection**  
+    The user selects C, Java or Python.
 
-        st.write("""
-        Java is a high-level, object-oriented programming language
-        developed by James Gosling at Sun Microsystems.
+    **Step 2 — Question Input**  
+    The user enters a programming question.
 
-        Java is used to create secure, portable and reliable applications.
+    **Step 3 — Knowledge Retrieval**  
+    The chatbot searches the selected language's knowledge file.
 
-        ### Features of Java
-        - Object-oriented programming.
-        - Platform independent.
-        - Secure and robust.
-        - Automatic memory management.
-        - Supports multithreading.
+    **Step 4 — Answer Generation**  
+    Relevant information is retrieved from the knowledge.
 
-        ### Applications
-        - Android applications.
-        - Web applications.
-        - Enterprise software.
-        - Banking systems.
-        - Desktop applications.
+    **Step 5 — Display Answer**  
+    The answer is shown to the user on the chatbot page.
+    """)
 
-        ### Example Program
-        """)
+    st.header("📚 Knowledge Files")
 
-        st.code("""
-class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello World");
-    }
-}
-        """, language="java")
+    st.markdown("""
+    - `c.txt` — C programming concepts
+    - `java.txt` — Java programming concepts
+    - `python.txt` — Python programming concepts
+    """)
 
-        st.write("""
-        ### Explanation
-        1. class Main defines a class named Main.
-        2. main() is the starting method of the program.
-        3. System.out.println() displays text.
-        4. Java code runs through the JVM (Java Virtual Machine).
-        """)
+    st.header("🛠️ Technologies Used")
 
-    else:
+    st.markdown("""
+    - Python
+    - Streamlit
+    - Text-based knowledge retrieval
+    - GitHub
+    """)
 
-        st.markdown("## 🤖 Python Programming")
+# INFO PAGE
+elif page == "ℹ️ Info":
 
-        st.write("""
-        Python is a high-level, interpreted and general-purpose
-        programming language created by Guido van Rossum.
+    st.title("ℹ️ Project Information")
 
-        Python is popular for its simple syntax and readability.
+    st.header("Programming AI Chatbot")
 
-        ### Features of Python
-        - Easy to learn and read.
-        - Simple syntax.
-        - Large library support.
-        - Supports object-oriented programming.
-        - Dynamically typed language.
+    st.write("""
+    An educational programming chatbot that helps users understand
+    programming concepts, learn syntax, explore examples and
+    improve coding knowledge in C, Java and Python.
+    """)
 
-        ### Applications
-        - Artificial intelligence.
-        - Machine learning.
-        - Web development.
-        - Data science.
-        - Automation.
+    st.header("👩‍💻 Team Members")
 
-        ### Example Program
-        """)
+    members = [
+        "Jyothi",
+        "Aishwarya",
+        "Chaithra B H",
+        "Madava"
+    ]
 
-        st.code("""
-print("Hello World")
-        """, language="python")
+    for member in members:
+        st.markdown(f"👤 {member}")
 
-        st.write("""
-        ### Explanation
-        1. print() is a built-in Python function.
-        2. It displays text or values on the screen.
-        3. Python does not require semicolons for basic statements.
-        4. Python code is executed by the Python interpreter.
-        """)
+    st.header("🎯 Project Objective")
 
-    st.success("Explanation generated successfully! 🎉")
+    st.write("""
+    To make programming easier for students by providing a simple
+    interactive platform for learning programming concepts and
+    exploring coding examples.
+    """)
+
+    st.header("💡 Languages Covered")
+
+    st.markdown("""
+    🧡 C Programming
+
+    💙 Java Programming
+
+    💚 Python Programming
+    """)
